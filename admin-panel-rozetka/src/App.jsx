@@ -6,6 +6,10 @@ const App = () => {
     <Routes>
       <Route path="/" element={<Navigate to="/login" replace />} />
       <Route path={routes.login.path} element={routes.login.element} />
+      <Route
+        path={routes.productsTable.path}
+        element={routes.productsTable.element}
+      />
     </Routes>
   );
 };
