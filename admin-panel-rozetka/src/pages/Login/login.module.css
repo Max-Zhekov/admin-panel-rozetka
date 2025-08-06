@@ -1,0 +1,36 @@
+.container {
+  max-width: 1440px;
+  height: 100vh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  background-color: #f5f5f5;
+  padding: 80px 130px 213px;
+}
+
+.form {
+  margin-top: 85px;
+  display: flex;
+  flex-direction: column;
+  gap: 46px;
+}
+
+.button {
+  width: 277px;
+  height: 56px;
+  flex-shrink: 0;
+  background: #44b26f;
+  color: #fff;
+  font-family: sans-serif;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  border: none;
+  cursor: pointer;
+}
