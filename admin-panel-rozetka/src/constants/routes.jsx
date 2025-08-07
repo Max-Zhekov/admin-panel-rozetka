@@ -1,6 +1,6 @@
 import Login from "../pages/Login/Login.jsx";
 import ProductsPreview from "../pages/ProductsPreview/ProductsPreview.jsx";
-import ProductsTable from "../pages/ProductsTable/ProductsTable.jsx";
+import ProductsTablePage from "../pages/ProductsTable/ProductsTable.jsx";
 
 export const routes = {
   login: {
@@ -8,7 +8,7 @@ export const routes = {
     path: "/login",
   },
   productsTable: {
-    element: <ProductsTable />,
+    element: <ProductsTablePage />,
     path: "/productsTable",
   },
   productsPreview: {

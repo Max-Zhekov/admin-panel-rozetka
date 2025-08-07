@@ -10,6 +10,10 @@ const App = () => {
         path={routes.productsTable.path}
         element={routes.productsTable.element}
       />
+      <Route
+        path={routes.productsPreview.path}
+        element={routes.productsPreview.element}
+      />
     </Routes>
   );
 };
