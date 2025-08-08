@@ -2,7 +2,7 @@ import { TableRow, TableCell, IconButton } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-const ProductsTableRow = ({ product, onDelete }) => {
+const ProductsTableRow = ({ product, onAskDelete }) => {
   return (
     <TableRow>
       <TableCell>{product.id}</TableCell>
@@ -14,7 +14,7 @@ const ProductsTableRow = ({ product, onDelete }) => {
         <IconButton>
           <EditIcon sx={{ color: "black" }} />
         </IconButton>
-        <IconButton onClick={onDelete}>
+        <IconButton onClick={() => onAskDelete(product.id)}>
           <DeleteIcon sx={{ color: "black" }} />
         </IconButton>
       </TableCell>
