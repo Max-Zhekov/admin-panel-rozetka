@@ -55,7 +55,7 @@ const ProductCard = ({ product }) => {
             alignItems: "center",
           }}>
           <Typography sx={{ fontWeight: 700, color: "orange", fontSize: 18 }}>
-            {product.price}₴
+            {product.price}$
           </Typography>
           <Typography sx={{ fontSize: 14 }}>
             Кількість: {product.quantity}
