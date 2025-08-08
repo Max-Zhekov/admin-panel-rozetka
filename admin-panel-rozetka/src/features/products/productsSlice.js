@@ -1,5 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addProduct, deleteProduct, fetchProducts } from "./productsThunk";
+import {
+  addProduct,
+  deleteProduct,
+  editProduct,
+  fetchProducts,
+} from "./productsThunk";
 
 const productsSlice = createSlice({
   name: "products",
@@ -27,6 +32,15 @@ const productsSlice = createSlice({
       })
       .addCase(addProduct.fulfilled, (state, action) => {
         state.items.push(action.payload);
+      })
+      .addCase(editProduct.fulfilled, (state, action) => {
+        const index = state.items.findIndex(
+          (item) => item.id === action.payload.id
+        );
+
+        if (index !== -1) {
+          state.items[index] = action.payload;
+        }
       });
   },
 });

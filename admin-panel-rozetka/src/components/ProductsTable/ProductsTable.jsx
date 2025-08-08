@@ -12,6 +12,7 @@ import {
 import ProductsTableHead from "./ProductsTableHead";
 import ProductsTableRow from "./ProductsTableRow";
 import DeleteProductModal from "../modals/DeleteProductModal";
+import EditProductModal from "../modals/EditProductModal";
 
 const ProductsTable = () => {
   const dispatch = useDispatch();
@@ -19,6 +20,9 @@ const ProductsTable = () => {
 
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
   const [selectedProductId, setSelectedProductId] = useState(null);
+
+  const [editModalOpen, setEditModalOpen] = useState(false);
+  const [productToEdit, setProductToEdit] = useState(null);
 
   useEffect(() => {
     dispatch(fetchProducts());
@@ -41,8 +45,18 @@ const ProductsTable = () => {
     handleCloseDeleteModal();
   };
 
+  const handleOpenEditModal = (product) => {
+    setProductToEdit(product);
+    setEditModalOpen(true);
+  };
+
+  const handleCloseEditModal = () => {
+    setProductToEdit(null);
+    setEditModalOpen(false);
+  };
+
   if (loading) return <CircularProgress sx={{ m: 4 }} />;
-  if (error) return <p style={{ color: red }}>{error}</p>;
+  if (error) return <p style={{ color: "red" }}>{error}</p>;
 
   return (
     <>
@@ -66,6 +80,7 @@ const ProductsTable = () => {
                 key={product.id}
                 product={product}
                 onAskDelete={handleOpenDeleteModal}
+                onAskEdit={handleOpenEditModal}
               />
             ))}
           </TableBody>
@@ -77,6 +92,14 @@ const ProductsTable = () => {
         handleClose={handleCloseDeleteModal}
         onConfirm={handleConfirmDelete}
       />
+
+      {productToEdit && (
+        <EditProductModal
+          open={editModalOpen}
+          handleClose={handleCloseEditModal}
+          product={productToEdit}
+        />
+      )}
     </>
   );
 };

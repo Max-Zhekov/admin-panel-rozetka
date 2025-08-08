@@ -44,3 +44,19 @@ export const addProduct = createAsyncThunk(
     }
   }
 );
+
+export const editProduct = createAsyncThunk(
+  "product/edit",
+  async ({ id, updateData }, { rejectWithValue }) => {
+    try {
+      const response = await axios.put(
+        `https://689235a7447ff4f11fbf900b.mockapi.io/Products/${id}`,
+        updateData
+      );
+
+      return response.data;
+    } catch (err) {
+      return rejectWithValue("Error editing products ");
+    }
+  }
+);
