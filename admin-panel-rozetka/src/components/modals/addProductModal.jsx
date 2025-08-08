@@ -93,6 +93,18 @@ const addProductModal = ({ open, handleClose }) => {
             helperText={errors.photo && "Photo is required"}
           />
 
+          <TextField
+            fullWidth
+            margin="normal"
+            id="outlined-multiline-static"
+            label="Description"
+            multiline
+            rows={4}
+            {...register("description", { required: true })}
+            error={!!errors.description}
+            helperText={errors.description && "Description is required"}
+          />
+
           <Box sx={{ display: "flex", justifyContent: "end" }}>
             <Button
               variant="outlined"
