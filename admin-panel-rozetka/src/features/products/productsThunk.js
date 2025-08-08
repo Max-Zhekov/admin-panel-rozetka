@@ -14,3 +14,17 @@ export const fetchProducts = createAsyncThunk(
     }
   }
 );
+
+export const deleteProduct = createAsyncThunk(
+  "products/delete",
+  async (productId, { rejectWithValue }) => {
+    try {
+      await axios.delete(
+        `https://689235a7447ff4f11fbf900b.mockapi.io/Products/${productId}`
+      );
+      return productId;
+    } catch (err) {
+      return rejectWithValue("Error deleting product");
+    }
+  }
+);

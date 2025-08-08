@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../features/products/productsThunk";
+import { deleteProduct } from "../../features/products/productsThunk";
 import {
   Table,
   TableBody,
@@ -39,7 +40,11 @@ const ProductsTable = () => {
             "& td": { color: "inherit", fontWeight: 500 },
           }}>
           {items.map((product) => (
-            <ProductsTableRow key={product.id} product={product} />
+            <ProductsTableRow
+              key={product.id}
+              product={product}
+              onDelete={() => dispatch(deleteProduct(product.id))}
+            />
           ))}
         </TableBody>
       </Table>
