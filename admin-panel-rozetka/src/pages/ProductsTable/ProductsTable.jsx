@@ -1,10 +1,15 @@
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+
 import s from "./productsTable.module.css";
+
 import AddIcon from "@mui/icons-material/Add";
 import Button from "@mui/material/Button";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import Stack from "@mui/material/Stack";
-import { useNavigate } from "react-router-dom";
-import ProductsTable from "../../components/ProductsTable/ProductsTable"; // ✅ ВАЖНО
+
+import ProductsTable from "../../components/ProductsTable/ProductsTable";
+import AddProductModal from "../../components/modals/addProductModal";
 
 const ProductsTablePage = () => {
   const navigate = useNavigate();
@@ -12,6 +17,10 @@ const ProductsTablePage = () => {
   const handlePreviewClick = () => {
     navigate("/productsPreview");
   };
+
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   return (
     <div className={s.container}>
@@ -45,6 +54,7 @@ const ProductsTablePage = () => {
 
         <Button
           variant="contained"
+          onClick={handleOpen}
           startIcon={
             <AddIcon sx={{ fill: "#000", width: "25px", height: "25px" }} />
           }
@@ -56,6 +66,8 @@ const ProductsTablePage = () => {
           }}>
           Add product
         </Button>
+
+        <AddProductModal open={open} handleClose={handleClose} />
       </Stack>
 
       <ProductsTable />

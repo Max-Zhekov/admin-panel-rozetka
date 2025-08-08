@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { deleteProduct, fetchProducts } from "./productsThunk";
+import { addProduct, deleteProduct, fetchProducts } from "./productsThunk";
 
 const productsSlice = createSlice({
   name: "products",
@@ -24,6 +24,9 @@ const productsSlice = createSlice({
       })
       .addCase(deleteProduct.fulfilled, (state, action) => {
         state.items = state.items.filter((item) => item.id !== action.payload);
+      })
+      .addCase(addProduct.fulfilled, (state, action) => {
+        state.items.push(action.payload);
       });
   },
 });

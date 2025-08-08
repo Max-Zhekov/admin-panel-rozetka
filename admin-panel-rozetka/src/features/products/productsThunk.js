@@ -28,3 +28,19 @@ export const deleteProduct = createAsyncThunk(
     }
   }
 );
+
+export const addProduct = createAsyncThunk(
+  "product/add",
+  async (productData, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(
+        "https://689235a7447ff4f11fbf900b.mockapi.io/Products",
+        productData
+      );
+
+      return response.data;
+    } catch (err) {
+      return rejectWithValue("Error adding products ");
+    }
+  }
+);
