@@ -9,8 +9,16 @@ export const loginThunk = createAsyncThunk(
         email: name,
         password: password,
       });
-      if (res) return res;
-      return rejectWithValue("Неверное имя или пароль");
+
+      const data = res?.data;
+
+      if (data?.token) {
+        localStorage.setItem("token", data.token);
+      } else {
+        return rejectWithValue("Неверное имя или пароль");
+      }
+
+      return data;
     } catch (error) {
       return rejectWithValue("Ошибка при авторизации");
     }

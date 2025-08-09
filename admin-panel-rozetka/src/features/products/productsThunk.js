@@ -5,12 +5,15 @@ export const fetchProducts = createAsyncThunk(
   "products/fetchAll",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get(
-        "https://689235a7447ff4f11fbf900b.mockapi.io/Products"
-      );
+      const token = localStorage.getItem("token");
+      const response = await axios.get("http://fak.pp.ua:81/api/products", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       return response.data;
     } catch (err) {
-      return rejectWithValue("Error loading products ");
+      return rejectWithValue(err.status);
     }
   }
 );
@@ -19,12 +22,15 @@ export const deleteProduct = createAsyncThunk(
   "products/delete",
   async (productId, { rejectWithValue }) => {
     try {
-      await axios.delete(
-        `https://689235a7447ff4f11fbf900b.mockapi.io/Products/${productId}`
-      );
+      const token = localStorage.getItem("token");
+      await axios.delete(`http://fak.pp.ua:81/api/products/${productId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       return productId;
     } catch (err) {
-      return rejectWithValue("Error deleting product");
+      return rejectWithValue(err.status);
     }
   }
 );
@@ -33,14 +39,20 @@ export const addProduct = createAsyncThunk(
   "product/add",
   async (productData, { rejectWithValue }) => {
     try {
+      const token = localStorage.getItem("token");
       const response = await axios.post(
-        "https://689235a7447ff4f11fbf900b.mockapi.io/Products",
-        productData
+        "http://fak.pp.ua:81/api/products",
+        productData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
 
       return response.data;
     } catch (err) {
-      return rejectWithValue("Error adding products ");
+      return rejectWithValue(err.status);
     }
   }
 );
@@ -49,14 +61,20 @@ export const editProduct = createAsyncThunk(
   "product/edit",
   async ({ id, updateData }, { rejectWithValue }) => {
     try {
+      const token = localStorage.getItem("token");
       const response = await axios.put(
-        `https://689235a7447ff4f11fbf900b.mockapi.io/Products/${id}`,
-        updateData
+        `http://fak.pp.ua:81/api/products/${id}`,
+        updateData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
 
       return response.data;
     } catch (err) {
-      return rejectWithValue("Error editing products ");
+      return rejectWithValue(err.status);
     }
   }
 );

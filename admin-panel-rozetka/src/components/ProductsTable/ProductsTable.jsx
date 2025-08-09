@@ -13,20 +13,32 @@ import ProductsTableHead from "./ProductsTableHead";
 import ProductsTableRow from "./ProductsTableRow";
 import DeleteProductModal from "../modals/DeleteProductModal";
 import EditProductModal from "../modals/EditProductModal";
+import { useNavigate } from "react-router-dom";
 
 const ProductsTable = () => {
   const dispatch = useDispatch();
-  const { items, loading, error } = useSelector((state) => state.products);
+  const navigate = useNavigate();
+  const { items, loading, error, needReload, rejected } = useSelector(
+    (state) => state.products
+  );
 
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
   const [selectedProductId, setSelectedProductId] = useState(null);
 
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [productToEdit, setProductToEdit] = useState(null);
+  const [firstRun, setFirstRun] = useState(true);
 
   useEffect(() => {
-    dispatch(fetchProducts());
-  }, [dispatch]);
+    if (needReload || firstRun) {
+      dispatch(fetchProducts());
+      setFirstRun(false);
+    }
+
+    if (rejected) {
+      navigate("/");
+    }
+  }, [dispatch, needReload, firstRun, rejected]);
 
   const handleOpenDeleteModal = (id) => {
     setSelectedProductId(id);
